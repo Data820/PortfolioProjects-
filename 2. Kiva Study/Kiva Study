@@ -1,0 +1,126 @@
+# Kiva is a non-profit organization that is headquartered in San Francisco, California. They allow users to lend money to entrepreneurs and students in many different 
+# countries around the world. This data looks at a set of countries that have received loans from Kiva. 
+
+
+
+# 1. Import Python Modules
+from matplotlib import pyplot as plt 
+import pandas as pd 
+import seaborn as sns 
+
+
+
+#2. Load data frame and check it 
+
+df =pd.read_csv('C:\kiva_data.csv')
+df.head()
+
+print(df.head(25))
+
+
+#3. Examine the average amount of loans to each country through the use of a Bar plot. 
+
+f, ax = plt.subplots(figsize=(15, 10))
+
+sns.barplot(data=df, x="country", y="loan_amount")
+plt.show()
+
+
+
+#4. Adding the $ symbol to the chart
+
+import matplotlib.ticker as mtick
+f, ax = plt.subplots(figsize=(15, 10))
+sns.barplot(data=df, x="country", y = "loan_amount")
+fmt = '${x:,.0f}'
+tick = mtick.StrMethodFormatter(fmt)
+ax.yaxis.set_major_formatter(tick) 
+
+
+
+#5. Bar Chart Data Assessments 
+
+#1. Males received larger average loan amounts.
+#2. El Salvador has the least amount of gender disparity in terms of loans. 
+#3. Kiva should try to decrease the gender gap in loans given to males and females. 
+
+
+#6.Styling the chart 
+
+
+sns.set_palette("Accent")
+sns.set_style("whitegrid")
+plt.figure(figsize=(25, 15))
+plt.title("Average Loan Amounts Given by Kiva, by country, by gender (in $ USD)")
+sns.barplot(data=df, x="country", y="loan_amount", hue="gender")
+
+
+
+#7. Creating a box plot to view loan distribution by country
+
+plt.figure(figsize=(16, 10))
+sns.boxplot(data=df, x="country", y="loan_amount")
+plt.show()
+
+
+
+#8. Box Plot Assessments
+
+ # 1. Kenya has the widest distribution of loans of the countries in the dataset. 
+ # 2.  You would receive the highest loan in Cambodia. 
+ 
+ 
+# 9. Creating a box plot that visualizes the distribution of loans by activity.
+
+plt.figure(figsize=(16, 10))
+
+sns.boxplot(data=df, x="activity", y="loan_amount")
+plt.show()
+
+#10. Box Plot by Activity Assessment
+
+plt.figure(figsize=(16, 10))
+
+sns.violinplot(data=df, x="activity", y = "loan_amount")
+plt.show()
+
+# 11. Violin Plot by activity 
+
+plt.figure(figsize=(16, 10))
+
+sns.violinplot(data=df, x="activity", y = "loan_amount")
+plt.show()
+
+
+#12. Violin Plot by country. 
+
+plt.figure(figsize=(16, 10))
+
+sns.violinplot(data=df, x="country", y = "loan_amount")
+plt.show()
+
+# 13. Split violin plots that uses gender as the hue parameter.
+
+sns.set_palette("Spectral")
+plt.figure(figsize=(18, 12))
+
+sns.violinplot(data=df, x="country", y = "loan_amount", hue="gender", split=True)
+plt.show()
+
+
+# 14.  Box plot data assessments 
+
+
+ # 1. The average loan for men in Pakistan is greater than the average amount given to women. 
+ # 2. The average loan for men in Cambodia is greater than the average amount given to women. 
+ # 3. Loan amounts between men and women are similar in El Salvador.
+
+
+
+
+
+
+
+
+
+ 

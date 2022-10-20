@@ -1,0 +1,89 @@
+# Introduction 
+FIFA is an international football organization that is headquartered in Zürich, Switzerland. It consists of 211 national organizations. The FIFA World Cup is a global football competition that is held every four years.
+The dataset featured in this study is derived from the FIFA World Cup Archive website.
+
+
+# 1. Import modules and check data 
+
+from matplotlib import pyplot as plt
+import pandas as pd
+import seaborn as sns
+
+df =pd.read_csv('C:\World_Cup_Matches.csv')
+df.head()
+
+df['Year'] = pd.to_numeric(df['Year'], errors='coerce').fillna(0).astype(int)
+df.head()
+
+df['Home Team Goals'] = pd.to_numeric(df['Home Team Goals'], errors='coerce').fillna(0).astype(int)
+df.head()
+
+df['Away Team Goals'] = pd.to_numeric(df['Away Team Goals'], errors='coerce').fillna(0).astype(int)
+df.head()
+
+
+
+
+# 2.  Set up and create Bar Plot 
+
+# Create Total Goals column 
+df['Total Goals']= df['Home Team Goals']+df['Away Team Goals']
+print(df.head())
+
+
+# 3. Work on visual aspects of Bar Chart 
+
+
+sns.set_style('whitegrid')
+sns.set_context('notebook', font_scale=1.25)
+f,ax=plt.subplots(figsize=(12,7))
+ax=sns.barplot(x=df['Year'], y=df['Total Goals']) 
+
+
+ # 4. Add title to Bar chart 
+
+ sns.set_style('whitegrid')
+sns.set_context('notebook', font_scale=1.25)
+f,ax=plt.subplots(figsize=(12,7))
+ax=sns.barplot(x=df['Year'], y=df['Total Goals']) 
+ax.set_title('Average Goals Per Year in World Cup')
+plt.show()
+
+# 5. Create Box Plot 
+# Create Goals dataframe 
+df_goals=pd.read_csv('C:\goals.csv')
+print(df_goals.head())
+
+
+ # 6. Context and font scale for Box Plot 
+
+sns.set_context('notebook', font_scale=1.25)
+
+
+# 7. Set fig size  
+
+f,ax2=plt.subplots(figsize=(12,7))
+
+
+# 8. Create Box Plot 
+
+f, ax2 = plt.subplots(figsize=(12, 7))
+ax2 = sns.boxplot(
+    x = 'year',
+    y = 'goals',
+      data = df_goals,
+    palette = ('Spectral'))
+    
+    
+    #  9. Add Box Plot title 
+
+f, ax2 = plt.subplots(figsize=(12, 7))
+ax2 = sns.boxplot(
+    x = 'year',
+    y = 'goals',
+      data = df_goals,
+    palette = ('Spectral'))
+ax2.set_title('World Cup Goals')
+
+
+
